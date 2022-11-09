@@ -2,6 +2,22 @@
 1. Java 8
 2. Spring 2.1.8
 
+### Controller 
+      Controller <- EndPoints
+      Controller <- DTO's(Data TRansfer Object)
+      Controller <- Service
+
+### Service 
+     Service <- Regras de Negócio
+
+### Model 
+      Model <- Service
+      Model  <- Entities<br />
+      Model  <- Repositories(DAO's Persistência)<br />
+
+### Estrutura Genérica 
+      Controller <- Service -> Model
+
 ### Caso de uso -> EFETUAR LOGIN
 1. Caso o usuário esteja cadastrado no sistema, poderá efetuar o login, dessa forma o sistema irá exigir que o mesmo informe obrigatoriamente o email e senha cadastrados no sistema. Caso não esteja cadatrado, o sistema deverá disponibilizar um formulário para cadastro do usuário.
 
@@ -11,24 +27,23 @@
 ### Caso de uso -> CADASTRO DE LANÇAMENTOS
 1. Deseja-se cadastar os lançamentos de Receita e Despesa de cada mês, com seu valor e descrição. Ao cadastrar, ele ficará pendente. Haverá opção de cancelá-lo ou efetivá-lo. Ao efetivá-lo, ele incorpora o saldo. Os usuários poderão consultar seus lançamentos, filtrando-os por ano, mês, descrição ou tipo de lançamento.
 
-<br />
-Controller <- EndPoints<br />
-           <- DTO's(Data TRansfer Object)<br />
-           <- Service<br />
-<br />
-Service <- Regras de Negócio<br />
-
-<br />
-Model <- Service<br />
-      <- Entities<br />
-      <- Repositories(DAO's Persistência)<br />
-
-<br />
-Controller <- Service -> Model <br />
-
 ### Passos para iniciar projeto.
 1. Criar base de dados.
 2. Criar Entidades no postgres
 3. Modelo-> Entity-> Mapear Entidades(Entity) com JPA (Estudar sobre as funções ManyToOne...)<br />
-Modelo-> Enums-> Mapear tipos de status.
-4. Configurar Repositories JPA
+   Modelo-> Enums-> Serão os tipos dos campos status e tipo. Estou forçando a sempre receber estes valores.<br />
+   Modelo-> Repository-> Configurar interface Jpa<br />
+6. Service-> UsuarioService.java-> Implementar Interface métodos iniciais que serão utilizados na camada Implemetation.
+7. Service-> Impl-> UsuarioServiceImpl.java-> Classe que irá implementar a interface criada no passo 6 contendo mesmos métodos
+8. VALIDAÇÃO E-MAIL. <br />
+   Modelo-> Repository-> UsuarioRepository-> Camada repository, criar existsByEmail.<br />
+   Service-> Impl-> UsuarioServiceImpl -> Implementar o exists criado.<br />
+   Service-> Impl-> Criar exception customizada.<br />
+   Exception-> RegraNegocioException.java<br />
+
+### Primeiro Test "Valida Existência Email"
+9. Configurar application-test.properties com banco de dados alternativo h2.
+10. Packing de Test, criar a mesma estrutura do projeto padrão. 
+11. Modelo-> Repository-> UsuarioRepositoryTest.java (junit será os pacote importados)
+12. Executar Test botão direito Run Test.
+
