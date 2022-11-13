@@ -41,12 +41,12 @@
    Service-> Impl-> Criar exception customizada.<br />
    Exception-> RegraNegocioException.java<br />
 
-### Primeiro Test "Valida Existência Email Repositório" (Validará nosso método criado acessando diretamente o repositorio)
+### (Test Integração) Primeiro Test "Valida Existência Email Repositório" (Validará nosso método criado acessando diretamente o repositorio)
 9. Configurar application-test.properties com banco de dados alternativo h2.
 10. Packing de Test, criar a mesma estrutura do projeto padrão. 
 11. Modelo-> Repository-> UsuarioRepositoryTest.java (junit será os pacote importados)
 
-### Segundo Test "Valida Existência Email Service" (Validará nosso método acessando diretamente a class de implementação)
+### (Test Unitário) Segundo Test "Valida Existência Email Service" (Validará nosso método acessando diretamente a class de implementação)
 12. Packing de Test, criar a mesma estrutura do projeto padrão.
 13. Service-> UsuarioServiceTest.java
 
@@ -54,3 +54,6 @@
 14. Modelo-> Repository-> UsuarioRepository.java
 15. Exception-> ErroAutenticacaoException.java
 16. Método autenticar.
+
+### Salvar usuário
+17. Service-> Impl-> UsuarioServiceImpl.java-> Implementar salvarUsuario(Usuario usuario)
