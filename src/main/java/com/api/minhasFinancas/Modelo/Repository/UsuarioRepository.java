@@ -10,7 +10,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // Retorna se existe ou não.
     boolean existsByEmail(String email);
 
-    // Retorna cadastro caso exista
+    // Retorna cadastro caso exista / Query Methods
     Optional<Usuario> findByEmail(String email);
 
     // Pesquisando por Email e Nome.

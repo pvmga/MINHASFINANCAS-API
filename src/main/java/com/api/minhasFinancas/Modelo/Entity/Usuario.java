@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "usuario" , schema = "financas")
-@Builder
+@Builder // para facilitar a criação de usuário. Jeito padrão seria toda vez dar um setNome, setEmail..
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

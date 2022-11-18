@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table( name = "lancamento", schema = "financas" )
-@Builder
+@Builder // para facilitar a criação de usuário. Jeito padrão seria toda vez dar um setNome, setEmail..
 @Data
 public class Lancamento {
 

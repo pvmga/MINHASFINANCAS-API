@@ -25,14 +25,14 @@ public class UsuarioRepositoryTest {
     UsuarioRepository repository;
 
     @Autowired
-    TestEntityManager entityManager;
+    TestEntityManager entityManager; // Utilizado apenas para testar. Spring JPA fornece
 
     @Test
     public void deveVerificarAExistenciaDeUmEmail() {
         // cenário
         Usuario usuario = criarUsuario();
         //repository.save(usuario);
-        entityManager.persist(usuario);
+        entityManager.persist(usuario); // ao usar entityManager a classe passada por parametro não pode ter id se não lança um erro
 
         // ação / execução
         boolean result = repository.existsByEmail("usuario@email.com");
@@ -69,7 +69,7 @@ public class UsuarioRepositoryTest {
     public void deveBuscarUmUsuarioPorEmail() {
         // cenário
         Usuario usuario = criarUsuario();
-        entityManager.persist(usuario);
+        entityManager.persist(usuario); // ao usar entityManager a classe passada por parametro não pode ter id se não lança um erro
 
         // verificacao
         Optional<Usuario> result = repository.findByEmail("usuario@email.com");
