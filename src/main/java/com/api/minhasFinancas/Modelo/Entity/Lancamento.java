@@ -1,7 +1,7 @@
 package com.api.minhasFinancas.Modelo.Entity;
 
-import com.api.minhasFinancas.Modelo.Enums.StatusLancamento;
-import com.api.minhasFinancas.Modelo.Enums.TipoLancamento;
+import com.api.minhasFinancas.Modelo.Enums.StatusLancamentoEnums;
+import com.api.minhasFinancas.Modelo.Enums.TipoLancamentoEnums;
 import lombok.*;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Table( name = "lancamento", schema = "financas" )
 @Builder // para facilitar a criação de usuário. Jeito padrão seria toda vez dar um setNome, setEmail..
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lancamento {
 
     @Id
@@ -40,13 +42,12 @@ public class Lancamento {
     @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate dataCadastro;
 
-    // EnumType.STRING (Irá salvar o nome do banco de dados) EnumType.ORDINAL (Irá salvar 0 ou 1, mas também depende da quantidade de tipos que tem)
     @Column(name = "tipo")
     @Enumerated(value = EnumType.STRING)
-    private TipoLancamento tipo;
+    private TipoLancamentoEnums tipo;
 
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
-    private StatusLancamento status;
+    private StatusLancamentoEnums status;
 
 }

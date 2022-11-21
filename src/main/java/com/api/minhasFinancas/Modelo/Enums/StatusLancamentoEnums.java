@@ -1,6 +1,6 @@
 package com.api.minhasFinancas.Modelo.Enums;
 
-public enum StatusLancamento {
+public enum StatusLancamentoEnums {
 
     PENDENTE,
     CANCELADO,

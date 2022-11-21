@@ -21,8 +21,8 @@ CREATE TABLE financas.lancamento
   mes integer NOT NULL,
   ano integer NOT NULL,
   valor numeric(16,2),
-  tipo character varying(20) CHECK (tipo in ('RECEITA', 'DESPESA')) NOT NULL,
-  status character varying(20) CHECK (tipo in ('PENDENTE', 'CANCELADO', 'EFETIVADO')) NOT NULL,
+  tipo character varying(20) NOT NULL,
+  status character varying(20) NOT NULL,
   id_usuario bigint REFERENCES financas.usuario (id),
   data_cadastro date default now()
 );
