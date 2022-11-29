@@ -29,6 +29,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Transactional
     public Lancamento salvar(Lancamento lancamento) {
         validar(lancamento);
+        // Ao salvar irá setar o status como PENDENTE.
         lancamento.setStatus(StatusLancamentoEnums.PENDENTE);
         return repository.save(lancamento);
     }
@@ -53,7 +54,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     public List<Lancamento> buscar(Lancamento lancamentoFiltro) {
         // Segundo parametro é opcional
         // withIgnoreCase -> Tanto faz se o usuário passou em caixa alta ou baixa.
-        // withStringMatcher -> Forma que irá buscar as informações no banco de dados
+        // withStringMatcher -> Forma que irá buscar as informações no banco de dados "Encontrar todos os lançamentos que contenha a letra A no meio por exemplo"
         Example example = Example.of(lancamentoFiltro,
                 ExampleMatcher.matching()
                         .withIgnoreCase()
@@ -64,14 +65,8 @@ public class LancamentoServiceImpl implements LancamentoService {
     }
 
     @Override
-    public void atualizarStatus(Lancamento lancamento, StatusLancamentoEnums status) {
-        lancamento.setStatus(status);
-        atualizar(lancamento);
-
-    }
-
-    @Override
     public void validar(Lancamento lancamento) {
+        // remove espaço antes e depois do que foi digitado na String.
         if (lancamento.getDescricao() == null || lancamento.getDescricao().trim().equals("")) {
             throw new RegraNegocioException("Informe uma Descrição válida.");
         }
@@ -80,6 +75,7 @@ public class LancamentoServiceImpl implements LancamentoService {
             throw new RegraNegocioException("Informe um Mês válido.");
         }
 
+        // Transformado em String para comparar se a quantidade de caracteres não é igual a 4
         if (lancamento.getAno() == null || lancamento.getAno().toString().length() != 4) {
             throw new RegraNegocioException("Informe um Ano válido");
         }
@@ -88,6 +84,9 @@ public class LancamentoServiceImpl implements LancamentoService {
             throw new RegraNegocioException("Informe um Usuário.");
         }
 
+        // compareTo -> Compara o getValor com BigDecimal.ZERO
+        // (Irá retornar 1 caso o getValor seja maior,
+        // irá retornar 0 caso seja igual e irá retornar -1 caso o getValor seja menor que o BigDecimal.ZERO)
         if (lancamento.getValor() == null || lancamento.getValor().compareTo(BigDecimal.ZERO) < 1) {
             throw new RegraNegocioException("Informe um Valor válido");
         }

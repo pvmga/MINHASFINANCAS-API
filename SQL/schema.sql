@@ -11,7 +11,7 @@ CREATE TABLE financas.usuario
   nome character varying(150),
   email character varying(100),
   senha character varying(20),
-  data_cadastro date default now()
+  data_cadastro timestamp without time zone
 );
 
 CREATE TABLE financas.lancamento
@@ -24,5 +24,5 @@ CREATE TABLE financas.lancamento
   tipo character varying(20) NOT NULL,
   status character varying(20) NOT NULL,
   id_usuario bigint REFERENCES financas.usuario (id),
-  data_cadastro date default now()
+  data_cadastro timestamp without time zone
 );

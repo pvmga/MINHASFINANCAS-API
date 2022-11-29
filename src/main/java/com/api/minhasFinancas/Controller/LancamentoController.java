@@ -15,12 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("api/lancamentos")
-@RequiredArgsConstructor
+@RequiredArgsConstructor // Essa anotation faz com que seja criado todos argumentos que precisam ser criados que contenham "final"
 public class LancamentoController {
     private final LancamentoService service;
     private final UsuarioService usuarioService;
@@ -51,6 +53,14 @@ public class LancamentoController {
         }).orElseGet( () -> new ResponseEntity("Lançamento não encontrado na base de dados", HttpStatus.BAD_REQUEST));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity deletar( @PathVariable("id") Long id ) {
+        return service.obterPorId(id).map( entity -> {
+            service.deletar(entity);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }).orElseGet( () -> new ResponseEntity("Lancamento não encontrado na base de dados", HttpStatus.BAD_REQUEST));
+    }
+
     @PutMapping("{id}/atualiza-status")
     public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody AtualizaStatusDTO dto) {
         return service.obterPorId(id).map( entity -> {
@@ -66,14 +76,6 @@ public class LancamentoController {
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }).orElseGet( () -> new ResponseEntity("Lançamento não encontrado na base de dados", HttpStatus.BAD_REQUEST));
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity deletar( @PathVariable("id") Long id ) {
-        return service.obterPorId(id).map( entity -> {
-            service.deletar(entity);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }).orElseGet( () -> new ResponseEntity("Lancamento não encontrado na base de dados", HttpStatus.BAD_REQUEST));
     }
 
     @GetMapping
@@ -99,7 +101,6 @@ public class LancamentoController {
         List<Lancamento> lancamentos = service.buscar(lancamentoFiltro);
         return ResponseEntity.ok(lancamentos);
     }
-
     private Lancamento retornaConvertido(LancamentoDTO dto) {
         Lancamento lancamento = new Lancamento();
         lancamento.setId(dto.getId());
@@ -114,6 +115,7 @@ public class LancamentoController {
 
         lancamento.setUsuario(usuario);
 
+        // Se não validar e passar Null dará erro, pois estamos convertendo o tipo e status.
         if(dto.getTipo() != null) {
             lancamento.setTipo(TipoLancamentoEnums.valueOf(dto.getTipo()));
         }
@@ -121,6 +123,8 @@ public class LancamentoController {
         if(dto.getStatus() != null) {
             lancamento.setStatus(StatusLancamentoEnums.valueOf(dto.getStatus()));
         }
+
+        lancamento.setDataCadastro(LocalDateTime.now(ZoneId.of("UTC")));
 
         return lancamento;
     }

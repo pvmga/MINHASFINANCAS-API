@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,4 +22,5 @@ public class LancamentoDTO {
     private Long usuario;
     private String tipo;
     private String status;
+    private LocalDateTime dataCadastro;
 }

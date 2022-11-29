@@ -7,7 +7,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table( name = "lancamento", schema = "financas" )
@@ -39,8 +39,8 @@ public class Lancamento {
     private BigDecimal valor;
 
     @Column(name = "data_cadastro")
-    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-    private LocalDate dataCadastro;
+    //@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDateTime dataCadastro;
 
     @Column(name = "tipo")
     @Enumerated(value = EnumType.STRING)

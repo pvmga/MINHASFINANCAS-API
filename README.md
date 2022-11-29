@@ -100,3 +100,10 @@
 
 ### Controller
 23. Controller-> LancamentoController.java
+
+### (Test Integração) Teste de lançamento repository
+24. Repository-> LancamentoRepositoryTest.java
+
+
+### (Test Unitário) Teste da camada service
+25. Service-> LancamentoServiceTest.java

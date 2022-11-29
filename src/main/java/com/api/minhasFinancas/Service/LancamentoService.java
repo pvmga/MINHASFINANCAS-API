@@ -13,7 +13,6 @@ public interface LancamentoService {
     Lancamento atualizar(Lancamento lancamento);
     void deletar(Lancamento lancamento);
     List<Lancamento> buscar(Lancamento lancamentoFiltro);
-    void atualizarStatus(Lancamento lancamento, StatusLancamentoEnums status);
     void validar(Lancamento lancamento);
 
     Optional<Lancamento> obterPorId(Long id);
