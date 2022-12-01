@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table( name = "usuario" , schema = "financas")
@@ -25,6 +27,7 @@ public class Usuario {
     private String email;
 
     @Column(name = "senha")
+    @JsonIgnore
     private String senha;
 
 }

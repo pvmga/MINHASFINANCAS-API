@@ -107,3 +107,6 @@
 
 ### (Test Unitário) Teste da camada service
 25. Service-> LancamentoServiceTest.java
+
+### Test camada controller
+26. Api-> Controller-> UsuarioControllerTeste.java

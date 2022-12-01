@@ -29,7 +29,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticar")
-    public ResponseEntity autenticar ( @RequestBody UsuarioDTO dto ) {
+    public ResponseEntity<?> autenticar ( @RequestBody UsuarioDTO dto ) {
         try {
             Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());
             return ResponseEntity.ok(usuarioAutenticado);
@@ -39,7 +39,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity salvar( @RequestBody UsuarioDTO dto ) {
+    public ResponseEntity<?> salvar( @RequestBody UsuarioDTO dto ) {
 
         Usuario usuario = Usuario.builder()
                 .nome(dto.getNome())
@@ -56,7 +56,7 @@ public class UsuarioController {
     }
 
     @GetMapping("{id}/saldo")
-    public ResponseEntity obterSaldo( @PathVariable("id") Long id) {
+    public ResponseEntity<?> obterSaldo( @PathVariable("id") Long id) {
 
         Optional<Usuario> usuario = service.obterPorId(id);
         if(!usuario.isPresent()) {

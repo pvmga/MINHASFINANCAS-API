@@ -65,6 +65,12 @@ public class LancamentoServiceImpl implements LancamentoService {
     }
 
     @Override
+	public void atualizarStatus(Lancamento lancamento, StatusLancamentoEnums status) {
+		lancamento.setStatus(status);
+		atualizar(lancamento);
+	}
+
+    @Override
     public void validar(Lancamento lancamento) {
         // remove espaço antes e depois do que foi digitado na String.
         if (lancamento.getDescricao() == null || lancamento.getDescricao().trim().equals("")) {
@@ -77,7 +83,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 
         // Transformado em String para comparar se a quantidade de caracteres não é igual a 4
         if (lancamento.getAno() == null || lancamento.getAno().toString().length() != 4) {
-            throw new RegraNegocioException("Informe um Ano válido");
+            throw new RegraNegocioException("Informe um Ano válido.");
         }
 
         if (lancamento.getUsuario() == null || lancamento.getUsuario().getId() == null) {
@@ -88,11 +94,11 @@ public class LancamentoServiceImpl implements LancamentoService {
         // (Irá retornar 1 caso o getValor seja maior,
         // irá retornar 0 caso seja igual e irá retornar -1 caso o getValor seja menor que o BigDecimal.ZERO)
         if (lancamento.getValor() == null || lancamento.getValor().compareTo(BigDecimal.ZERO) < 1) {
-            throw new RegraNegocioException("Informe um Valor válido");
+            throw new RegraNegocioException("Informe um Valor válido.");
         }
 
         if (lancamento.getTipo() == null) {
-            throw new RegraNegocioException("Informe um Tipo de Lançamento");
+            throw new RegraNegocioException("Informe um Tipo de Lançamento.");
         }
 
     }

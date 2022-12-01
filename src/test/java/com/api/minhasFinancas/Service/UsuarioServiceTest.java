@@ -7,14 +7,11 @@ import com.api.minhasFinancas.Modelo.Repository.UsuarioRepository;
 
 import com.api.minhasFinancas.Service.Impl.UsuarioServiceImpl;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
+
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.ActiveProfiles;

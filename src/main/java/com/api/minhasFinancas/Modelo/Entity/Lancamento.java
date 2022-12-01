@@ -3,7 +3,6 @@ package com.api.minhasFinancas.Modelo.Entity;
 import com.api.minhasFinancas.Modelo.Enums.StatusLancamentoEnums;
 import com.api.minhasFinancas.Modelo.Enums.TipoLancamentoEnums;
 import lombok.*;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
