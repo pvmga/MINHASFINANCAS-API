@@ -64,7 +64,7 @@ public class LancamentoController {
     @PutMapping("{id}/atualiza-status")
     public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody AtualizaStatusDTO dto) {
         return service.obterPorId(id).map( entity -> {
-            StatusLancamentoEnums statusSelecionado = StatusLancamentoEnums.valueOf(dto.getStatus());
+            StatusLancamentoEnums statusSelecionado = StatusLancamentoEnums.valueOf(dto.getStatus()); // estou procurando o status enviado dentro da Enums.
             if (statusSelecionado == null) {
                 return ResponseEntity.badRequest().body("Não foi possível atualizar o status do lançamento, envie um status válido.");
             }

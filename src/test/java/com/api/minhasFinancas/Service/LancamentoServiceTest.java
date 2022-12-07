@@ -26,10 +26,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 //Test Unitário
 public class LancamentoServiceTest {
 
-    @SpyBean // classe que estamos testando, ele irá chamar os métodos reais.
+    @SpyBean // classe que estamos testando, ele irá chamar os métodos reais da camada service.
     LancamentoServiceImpl service;
 
-    @MockBean // simular as chamadas reais que temos dentro do nosso serviço.
+    @MockBean // simular as chamadas reais da camada reposity que temos dentro do nosso serviço.
     LancamentoRepository repository;
 
     @Test
@@ -130,6 +130,7 @@ public class LancamentoServiceTest {
 
         //List<Lancamento> lista = Arrays.asList(lancamento, lancamento, lancamento);
         List<Lancamento> lista = Arrays.asList(lancamento);
+        // quando chamar o repository chamando o findall passando qualquer Example, retorna a lista
         Mockito.when(repository.findAll(Mockito.any(Example.class))).thenReturn(lista);
 
         // execução
@@ -148,6 +149,7 @@ public class LancamentoServiceTest {
         // cenário
         Lancamento lancamento = LancamentoRepositoryTest.criarLancamento();
         lancamento.setId(1l);
+        lancamento.setStatus(StatusLancamentoEnums.PENDENTE); // não precisaria, mas colocamos pra deixar bem evidente o status inicial
         
         StatusLancamentoEnums novoStatus = StatusLancamentoEnums.EFETIVADO;
         Mockito.doReturn(lancamento).when(service).atualizar(lancamento);
@@ -200,6 +202,7 @@ public class LancamentoServiceTest {
     public void develancarErrosAoValidarUmLancamento() {
         Lancamento lancamento = new Lancamento();
 
+        // capturando o erro.
         Throwable erro = Assertions.catchThrowable( () -> service.validar(lancamento) );
         Assertions.assertThat(erro).isInstanceOf(RegraNegocioException.class).hasMessage("Informe uma Descrição válida.");
         lancamento.setDescricao("Salário");

@@ -48,7 +48,10 @@ public class UsuarioControllerTest {
         String email = "usuario@email.com";
         String senha = "123";
 
+        // usuário que deseja ser autenticado
         UsuarioDTO dto = UsuarioDTO.builder().email(email).senha(senha).build(); // json que irá receber
+
+        // usuário autenticado.
         Usuario usuario = Usuario.builder().id(1l).email(email).senha(senha).build();
 
         Mockito.when(service.autenticar(email, senha)).thenReturn(usuario);
@@ -101,6 +104,7 @@ public class UsuarioControllerTest {
         UsuarioDTO dto = UsuarioDTO.builder().email(email).senha(senha).build(); // json que irá receber
         Usuario usuario = Usuario.builder().id(1l).email(email).senha(senha).build();
 
+        // simulando a chamada de salvar passando qualquer usuario.
         Mockito.when(service.salvarUsuario(Mockito.any(Usuario.class))).thenReturn(usuario);
 
         String json = new ObjectMapper().writeValueAsString(dto);
