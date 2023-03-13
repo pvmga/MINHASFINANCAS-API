@@ -113,3 +113,14 @@
 
 ### Limpar pasta onde compila o projeto e gerar .jar
 27. mvn clean package
+
+### Testar o .jar
+28. Dentro da pasta target ->
+29. java -jar nome do arquivo
+
+### Hospedar Heroku
+1. Para testar basta baixar o heroku cli, instalar, abrir o prompt na pasta do projeto e digitar heroku, irá aparecer algumas informações.
+2. Criar projeto heroku create nome-projeto
+3. URL: https://minhasfinancas-api.herokuapp.com/
+4. git https://git.heroku.com/minhasfinancas-api.git
+5. git push heroku ou git push heroku master
