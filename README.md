@@ -110,3 +110,6 @@
 
 ### Test camada controller
 26. Api-> Controller-> UsuarioControllerTeste.java
+
+### Limpar pasta onde compila o projeto e gerar .jar
+27. mvn clean package

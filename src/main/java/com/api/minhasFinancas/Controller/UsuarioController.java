@@ -7,7 +7,6 @@ import com.api.minhasFinancas.Modelo.Entity.Usuario;
 import com.api.minhasFinancas.Service.LancamentoService;
 import com.api.minhasFinancas.Service.UsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     private final UsuarioService service;

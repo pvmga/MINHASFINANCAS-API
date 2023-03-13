@@ -23,6 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/lancamentos")
 @RequiredArgsConstructor // Essa anotation faz com que seja criado todos argumentos que precisam ser criados que contenham "final"
+@CrossOrigin(origins = "*")
 public class LancamentoController {
     private final LancamentoService service;
     private final UsuarioService usuarioService;
@@ -37,6 +38,12 @@ public class LancamentoController {
         }catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> obterLancamento( @PathVariable("id") Long id ) {
+        return service.obterPorId(id).map( entity -> new ResponseEntity(converter(entity), HttpStatus.OK) )
+                                    .orElseGet( () -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("{id}")
@@ -101,6 +108,21 @@ public class LancamentoController {
         List<Lancamento> lancamentos = service.buscar(lancamentoFiltro);
         return ResponseEntity.ok(lancamentos);
     }
+
+    // Convertendo Lancamento em DTO
+    private LancamentoDTO converter(Lancamento lancamento) {
+        return LancamentoDTO.builder()
+                            .id(lancamento.getId())
+                            .descricao(lancamento.getDescricao())
+                            .valor(lancamento.getValor())
+                            .mes(lancamento.getMes())
+                            .ano(lancamento.getAno())
+                            .status(lancamento.getStatus().name())
+                            .tipo(lancamento.getTipo().name())
+                            .usuario(lancamento.getUsuario().getId()).build();
+    }
+
+    // Convertendo DTO para lancamento
     private Lancamento retornaConvertido(LancamentoDTO dto) {
         Lancamento lancamento = new Lancamento();
         lancamento.setId(dto.getId());

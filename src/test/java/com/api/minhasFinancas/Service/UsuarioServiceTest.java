@@ -124,8 +124,7 @@ public class UsuarioServiceTest {
     @Test
     public void deveLancarErroQuandoSenhaNaoBater() {
         // cenário
-        String senha = "senha";
-        Usuario usuario = Usuario.builder().email("email@email.com").senha(senha).build();
+        Usuario usuario = Usuario.builder().email("email@email.com").senha("senha").build();
 
         Mockito.when(repository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
 

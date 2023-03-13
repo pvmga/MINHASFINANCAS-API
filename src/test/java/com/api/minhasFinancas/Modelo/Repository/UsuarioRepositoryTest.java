@@ -4,17 +4,17 @@ import com.api.minhasFinancas.Modelo.Entity.Usuario;
 import org.assertj.core.api.Assertions;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+//import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-@ExtendWith( SpringExtension.class )
+// @ExtendWith( SpringExtension.class ) // Extend já está instanciado no @DataJpaTest
 @ActiveProfiles("test") // irá procurar nosso application de test
 @DataJpaTest // Será aberto transação e no fim dará rollback. Não precisaremos realizar deleteAll()
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
